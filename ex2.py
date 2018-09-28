@@ -18,3 +18,14 @@ print ("Can you see why that printed False earlier?")
 print ("Is it greater?", 5 > -2)
 print ("Is it greater or equal?", 5 >= -2)
 print ("Is it less or equal?", 5 <= -2)
+
+
+# > greater than
+# >= greater than or equal to
+# < less than or equal to
+# <= less than or equal to
+# % percentage
+# * multiply
+# / divide
+# plus
+# minus
