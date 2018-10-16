@@ -27,9 +27,10 @@ while current_savings < depositAmount :
     current_savings += current_savings*(r/12)
     numberOfMonthsNeeded += 1
     #numberOfMonthsUntilRaise += 1
-    if (numberOfMonthsNeeded / 6) == int(numberOfMonthsNeeded):
-
-        current_savings = (current_savings * Semi_annual_raise)
+    #This if statement is divdiing the amount of months it current is at and then checking to see if it gives a whole number it then adds the raise amount.
+    if (numberOfMonthsNeeded%6) == 0:
+        print ("This actually happened")
+        monthly_salary = (monthly_salary * Semi_annual_raise)
         #print ("A raise happened")
 
 print ("Number of months: ",numberOfMonthsNeeded)
