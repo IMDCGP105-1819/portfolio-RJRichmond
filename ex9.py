@@ -47,10 +47,15 @@ while True:
         monthly_salary = (annual_salary / 12)
 
         if failsafe > 100:
+            print ("You cannot make this goal with your salary!")
             break
         if (current_savings < 250100 and current_savings > 249900):
-            print("break")
+            print ("Best savings rate", round(portion_saved,2))
+            print ("Steps in bisection search", bisectionTimes)
+            break
     elif (current_savings < 250100 and current_savings > 249900):
+        print ("Best savings rate", round(portion_saved,2))
+        print ("Steps in bisection search", bisectionTimes)
         break
 
     elif current_savings < depositAmount:
@@ -59,7 +64,8 @@ while True:
         numberOfMonths = 0
         monthly_salary = (annual_salary / 12)
         #guess = guess*10000
-
-
-print ("Best savings rate", portion_saved)
-print ("Steps in bisection search", bisectionTimes)
+        if failsafe > 100:
+            print ("You cannot make this goal with your salary!")
+            break
+    
+#print (current_savings)
