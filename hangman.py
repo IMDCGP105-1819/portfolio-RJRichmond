@@ -55,16 +55,13 @@ def is_word_guessed(secret_word, letters_guessed):
       False otherwise
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    NumberOfLettersInBoth = 0
-    for i in letters_guessed:
-        if i in secret_word:
-            NumberOfLettersInBoth += 1
-    if NumberOfLettersInBoth == len(secret_word):
+
+    CheckingSecretWord = "".join(get_guessed_word(secret_word,letters_guessed))
+
+    if CheckingSecretWord == secret_word:
         return True
     else:
         return False
-
-
 
 def get_guessed_word(secret_word, letters_guessed):
     '''
@@ -80,8 +77,11 @@ def get_guessed_word(secret_word, letters_guessed):
             MissingLetters.extend(str(i))
         else:
             MissingLetters.extend("_ ")
-    return " ".join(MissingLetters)
+    return MissingLetters
 
+def TotalScore(NumberOfGuesses,secret_word):
+    Score = NumberOfGuesses * len(secret_word)
+    return Score
 
 def get_available_letters(letters_guessed):
     '''
@@ -96,6 +96,19 @@ def get_available_letters(letters_guessed):
             Alphabet.remove(i)
 
     return " ".join(Alphabet)
+
+def InAlphabet(UserGuess):
+    for i in string.ascii_lowercase:
+        if UserGuess == i:
+            return True
+    return False
+
+def isVowel(UserGuess):
+    vowels = ['a','e','i','o','u']
+    for i in vowels:
+        if UserGuess == i:
+            return True
+    return False
 
 def hangman(secret_word):
     '''
@@ -126,25 +139,47 @@ def hangman(secret_word):
     print ("The word contains ", len(secret_word), " letters.")
     print ("You start with 6 Guesses.")
     NumberOfGuesses = 6
+    Warnings = 3
     letters_guessed = []
     while (is_word_guessed(secret_word,letters_guessed) == False):
         UserGuess = input(str("Please input a single letter ").lower())
-        #letters_guessed.extend(UserGuess)
         NumberOfGuesses -= 1
         if UserGuess in letters_guessed:
             print ("You have already Guessed this letter")
+            print ("You have",Warnings,"warnings left!")
+            NumberOfGuesses += 1
+            Warnings -= 1
         elif UserGuess in secret_word:
             print ("You have guessed a letter in the word!")
             NumberOfGuesses += 1
+        elif len(UserGuess) != 1 or InAlphabet(UserGuess) == False:
+            NumberOfGuesses += 1
+            Warnings -= 1
+            print ("Please input a single letter from the Alphabet")
+            print ("You have",Warnings,"warnings left!")
         else:
-            print ("The letter you have guessed is not in the word")
+            if (isVowel(UserGuess) == True):
+                print ("You have guessed a vowel which is not in the word so you lose 2 guesses!")
+                NumberOfGuesses -= 1
+            else:
+                print ("You have guessed a consonast which is not in the word so you lose 1 guess!")
         if NumberOfGuesses <= 0:
-            print ("You did not guess the word, it was ", secret_word)
+            print ("You did not guess the word, it was", secret_word)
             print ("Game Over")
             break
+
+        if Warnings < 1:
+            Warnings = 3
+            print ("You have used all of your warnings, you will lose 1 guess!")
+            NumberOfGuesses -= 1
         letters_guessed.extend(UserGuess)
         print (get_available_letters(letters_guessed))
-        print (get_guessed_word(secret_word, letters_guessed))
-        print (NumberOfGuesses)
+        print ("".join(get_guessed_word(secret_word, letters_guessed)))
+        print ("You have ",NumberOfGuesses," guesses remaining.")
+        print ("-----")
+    if (is_word_guessed(secret_word,letters_guessed) == True):
+        print("You have guessed the word, it was",secret_word,"Well Done!")
+        print("Your score for this game was",TotalScore(NumberOfGuesses,secret_word))
+        print("Game Over")
 secret_word = choose_word(wordlist)
 hangman(secret_word)
