@@ -17,9 +17,18 @@ class Fraction(object):
             sub2 = self.denum * other.denum
             return Fraction(sub1,sub2)
 
+        def __mul__(self,other):
+            mul1 = self.num * other.num
+            mul2 = self.denum * other.denum
+            return Fraction(mul1,mul2)
+
+        
 
 Fraction1 = Fraction(2,3)
 Fraction2 = Fraction(1,4)
 Add = Fraction1+Fraction2
 Sub = Fraction1-Fraction2
-print(Sub)
+Mul = Fraction1*Fraction2
+
+
+print(Mul)
