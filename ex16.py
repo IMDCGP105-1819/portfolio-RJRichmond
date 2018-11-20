@@ -1,6 +1,9 @@
 class Fraction(object):
         def __init__(self,num,denum):
-
+            if type(num)!=int:
+                raise Exception("The numerator of the fraction must be an int")
+            if type(denum)!=int:
+                raise Exception("The denominator of the fraction must be an int")
             self.num = num;
             self.denum = denum;
 
@@ -37,4 +40,4 @@ Mul = Fraction1*Fraction2
 Div = Fraction1/Fraction2
 Inv = Fraction1.Inverse()
 
-print(Inv)
+print(Fraction1)
