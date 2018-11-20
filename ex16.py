@@ -22,13 +22,19 @@ class Fraction(object):
             mul2 = self.denum * other.denum
             return Fraction(mul1,mul2)
 
-        
+        def __truediv__(self,other):
+            flipped = Fraction(other.denum, other.num)
+            return self * flipped
+
+        def Inverse(self):
+            return Fraction(self.denum, self.num)
 
 Fraction1 = Fraction(2,3)
 Fraction2 = Fraction(1,4)
 Add = Fraction1+Fraction2
 Sub = Fraction1-Fraction2
 Mul = Fraction1*Fraction2
+Div = Fraction1/Fraction2
+Inv = Fraction1.Inverse()
 
-
-print(Mul)
+print(Inv)
