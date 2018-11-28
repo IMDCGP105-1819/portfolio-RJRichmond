@@ -1,6 +1,6 @@
 import random
 
-#This is the base class which is defining the card properties such as the set it belongs to and the number.
+#This will be the base class it will have all of the defining features such as number and set it belongs to.
 class Card(object):
     def __init__(self,number,set):
         self.set = set;
@@ -35,3 +35,29 @@ class Card(object):
 
     def CardNumber(self,number):
         self.number = number
+
+"""
+This class is going to be the deck so it will have a way to reset the deck which will be drawing cards,
+a way to deal and a way to be able to shuffle the deck as well.
+"""
+class Deck(object):
+    def __init__(self,cards):
+        self.cards = cards;
+
+    def __str__(self):
+        Cards = []
+        for card in self.cards:
+            Cards.append(card.__str_())
+
+    def Reset(self):
+        self.cards = []
+        for i in range(53):
+            if i <= 12:
+                self.cards.append(Card(i+1,0))
+            if i > 13 and i <= 26:
+                self.cards.append(Card(i-13,1))
+            if i > 26 and i <= 39:
+                self.cards.append(Card(i-26,2))
+            if i > 39:
+                self.cards.append(Card(i-39,3))
+# The reset function is the reseting the deck by putting all cards back into it.
