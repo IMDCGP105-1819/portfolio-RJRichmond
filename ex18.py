@@ -47,7 +47,8 @@ class Deck(object):
     def __str__(self):
         Cards = []
         for card in self.cards:
-            Cards.append(card.__str_())
+            Cards.append(card.__str__())
+        return str(Cards)
 
     def Reset(self):
         self.cards = []
@@ -60,4 +61,46 @@ class Deck(object):
                 self.cards.append(Card(i-26,2))
             if i > 39:
                 self.cards.append(Card(i-39,3))
-# The reset function is the reseting the deck by putting all cards back into it.
+# The reset function is reseting the deck by putting all cards back into it.
+    def Shuffle(self):
+        random.shuffle(self.cards)
+    def Deal(self,Hand,DrawAmount):
+        if len(self.cards) > 0:
+            for i in range(DrawAmount):
+                try:
+                    Hand.cards.append(self.cards[len(self.cards)-1])
+                    self.cards.pop(len(self.cards)-1)
+                except:
+                    print("The deck has no more cards in it")
+                    break
+"""
+ The shuffle function is from the random library and it shuffles the list, to be in a random order.
+ and the Deal function takes in the amount hand which it needs to draw to and how many cards and then
+ gives the card to the hand by appending and removes it from the deck by popping it. The error exception then
+ checks if there is cards to draw and if not it breaks the deal loop.
+"""
+
+#For the hand class it will be pretty simple: a way of reseting the hand for each draw and being able to print the cards in the hand.
+class Hand(object):
+    def __init__(self,cards):
+        self.cards = cards;
+
+    def __str__(self):
+        Cards = []
+        for card in self.cards:
+            Cards.append(card.__str__())
+        return str(Cards)
+
+    def Reset(self):
+        self.cards = []
+
+Deck = Deck([])
+Hand = Hand([])
+
+Deck.Reset()
+Deck.Shuffle()
+while True:
+    Input = input(str("test").lower())
+    if Input == "yes":
+        print(Deck)
+        print(Hand)
