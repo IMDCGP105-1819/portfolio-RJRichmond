@@ -26,7 +26,6 @@ class Card(object):
             Cards.append("♦")
         elif self.set == 3:
             Cards.append("♣")
-        Cards.append("|")
 # This checks which suit the card belongs to and gives the symbol accordingly.
         return Cards
 
@@ -48,7 +47,8 @@ class Deck(object):
         Cards = []
         for card in self.cards:
             Cards.append(card.__str__())
-        return str(Cards)
+        Cardstr = " ".join(str(i) for i in Cards)
+        return Cardstr
 
     def Reset(self):
         self.cards = []
@@ -86,10 +86,10 @@ class Hand(object):
         self.cards = cards;
 
     def __str__(self):
-        Cards = []
+        Cards = ""
         for card in self.cards:
-            Cards.append(card.__str__())
-        return str(Cards)
+            Cards += str(card.__str__())
+        return Cards
 
     def Reset(self):
         self.cards = []
@@ -100,7 +100,17 @@ Hand = Hand([])
 Deck.Reset()
 Deck.Shuffle()
 while True:
-    Input = input(str("test").lower())
+    Input = input(str("Would you like to deal a hand? : ").lower())
+
+    if len(Deck.cards) <=0:
+        Deck.Reset()
+        Deck.Shuffle()
     if Input == "yes":
-        print(Deck)
+        Hand.Reset()
+        Deck.Deal(Hand,5)
+        Hand1 = Hand
         print(Hand)
+    elif Input == "no" or "quit":
+        break
+    else:
+        print("Please either enter yes to deal, or no if you would like to quit!")
