@@ -96,7 +96,7 @@ class Hand(object):
 
 Deck = Deck([])
 Hand = Hand([])
-
+# This is making the deck and the Hand, it then resets the deck filling it and shuffles it
 Deck.Reset()
 Deck.Shuffle()
 while True:
@@ -105,9 +105,11 @@ while True:
     if len(Deck.cards) <=0:
         Deck.Reset()
         Deck.Shuffle()
+#This is checking to see if the deck is empty
     if Input == "yes":
         Hand.Reset()
         Deck.Deal(Hand,5)
+# It then resets the hand and the deals 5 from the deck
         Hand1 = Hand
         print(Hand)
     elif Input == "no" or "quit":
